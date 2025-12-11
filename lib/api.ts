@@ -21,8 +21,13 @@ export async function fetchElonTweets(startDate?: string, endDate?: string): Pro
     if (startDate) params.startDate = startDate
     if (endDate) params.endDate = endDate
 
+    const isServer = typeof window === 'undefined';
+    const url = isServer 
+      ? "https://xtracker.polymarket.com/api/users/elonmusk/posts"
+      : "/api/tweets";
+
     const { data } = await axios.get<ApiResponse>(
-      "https://xtracker.polymarket.com/api/users/elonmusk/posts",
+      url,
       { params }
     );
 
