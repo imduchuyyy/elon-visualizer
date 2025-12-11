@@ -41,7 +41,7 @@ export function Dashboard({ initialTweets }: DashboardProps) {
 
             <DonationPopup />
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Elon Musk Tracker</h1>
+                <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Elon Musk Tracker - by @imduchuyyy</h1>
                 <div className="flex items-center space-x-2 bg-muted p-1 rounded-lg border w-fit">
                     <button
                         onClick={() => setTimezone("local")}
