@@ -9,21 +9,7 @@ export function DonationPopup() {
     const [isOpen, setIsOpen] = useState(true)
     const [copied, setCopied] = useState(false)
 
-    // Replace this with your actual wallet address
     const WALLET_ADDRESS = "0x4fff0f708c768a46050f9b96c46c265729d1a62f"
-
-    useEffect(() => {
-        // Show popup every 5 minutes (300,000 ms)
-        const timer = setInterval(() => {
-            setIsOpen(true)
-        }, 5 * 60 * 1000)
-
-        // Initial show after 5 minutes? Or immediately? 
-        // "Show popup every 5 minutes", usually implies an interval.
-        // Let's stick to interval. 
-
-        return () => clearInterval(timer)
-    }, [])
 
     const copyToClipboard = async () => {
         try {
