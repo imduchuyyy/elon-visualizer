@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Tweet } from "@/lib/api"
+import { useState, useEffect } from "react"
+import { Tweet, fetchElonTweets } from "@/lib/api"
 import { MarketAnalytics } from "./MarketAnalytics"
 import { StatsCard } from "./StatsCard"
 import { TimelineChart } from "./TimelineChart"
@@ -17,7 +17,23 @@ interface DashboardProps {
 }
 
 export function Dashboard({ initialTweets }: DashboardProps) {
-    const [tweets] = useState<Tweet[]>(initialTweets)
+    const [tweets, setTweets] = useState<Tweet[]>(initialTweets)
+
+    useEffect(() => {
+        const fetchTweets = async () => {
+            try {
+                const newTweets = await fetchElonTweets();
+                if (Array.isArray(newTweets)) {
+                    setTweets(newTweets);
+                }
+            } catch (error) {
+                console.error('Error auto-refreshing tweets:', error);
+            }
+        };
+
+        const interval = setInterval(fetchTweets, 60000); // 1 minute
+        return () => clearInterval(interval);
+    }, []);
     const [timezone, setTimezone] = useState<"local" | "austin">("local")
 
     const totalTweets = tweets.length
