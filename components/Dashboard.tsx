@@ -31,8 +31,7 @@ export function Dashboard({ initialTweets }: DashboardProps) {
             }
         };
 
-        const interval = setInterval(fetchTweets, 60000); // 1 minute
-        return () => clearInterval(interval);
+        fetchTweets()
     }, []);
     const [timezone, setTimezone] = useState<"local" | "austin">("local")
 
